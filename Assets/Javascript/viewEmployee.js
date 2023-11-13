@@ -21,7 +21,7 @@ function age(dob) {
 console.log(employeeid);
 view_Employee(employeeid);
 function view_Employee(_employeeid) {
-  fetch(`http://localhost:5000/employee/${_employeeid}`)
+  fetch(`${baseUrl}${_employeeid}`)
     .then((res) => {
       return res.json();
     })
@@ -30,14 +30,12 @@ function view_Employee(_employeeid) {
       document.getElementById(
         "employee-heading"
       ).innerHTML = `<div class="user-pic">
-                    <img src="/${
-                      data.image
-                    }" alt="" style="border-radius: 50%;">
+                    <img src="/${data.image
+        }" alt="" style="border-radius: 50%;">
                   </div>
                   <div class="employee-details-row">
-                    <h4>${data.salutation}${
-        data.firstName + " " + data.lastName
-      }</h4>
+                    <h4>${data.salutation}${data.firstName + " " + data.lastName
+        }</h4>
                     <P>${data.email}</P>
                   </div>
               </div>
@@ -112,8 +110,7 @@ function view_Employee(_employeeid) {
                 </div>
               </div>`;
       const empName = document.getElementById("empName");
-      empName.innerHTML = `Dashboard /${
-        data.firstName + " " + data.lastName}/ ${data.email}`;
+      empName.innerHTML = `Dashboard /${data.firstName + " " + data.lastName}/ ${data.email}`;
     });
 }
 //reDirecting to the home page
@@ -130,7 +127,7 @@ empDel.addEventListener("click", () => {
 
 // delete-method---------------
 function delete_employee(employeeid) {
-  fetch(`http://localhost:5000/employee/${employeeid}`, {
+  fetch(`${baseUrl}${employeeid}`, {
     method: "DELETE",
   });
   deletedEmployee();
@@ -145,7 +142,7 @@ function deletedEmployee() {
 
 
 const viewEdited = document.getElementById("btn-main");
-viewEdited.addEventListener("click",()=>{
+viewEdited.addEventListener("click", () => {
   editEmployee(employeeid);
   location.reload();
 });

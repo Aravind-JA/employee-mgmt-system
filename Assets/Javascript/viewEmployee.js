@@ -21,7 +21,7 @@ function age(dob) {
 console.log(employeeid);
 view_Employee(employeeid);
 function view_Employee(_employeeid) {
-  fetch(`http://localhost:5001/employee/${_employeeid}`)
+  fetch(`http://localhost:5000/employee/${_employeeid}`)
     .then((res) => {
       return res.json();
     })
@@ -130,7 +130,7 @@ empDel.addEventListener("click", () => {
 
 // delete-method---------------
 function delete_employee(employeeid) {
-  fetch(`http://localhost:5001/employee/${employeeid}`, {
+  fetch(`http://localhost:5000/employee/${employeeid}`, {
     method: "DELETE",
   });
   deletedEmployee();

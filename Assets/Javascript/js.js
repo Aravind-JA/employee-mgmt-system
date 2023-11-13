@@ -87,7 +87,7 @@ function edit_employee(empID) {
   btnMain
     .addEventListener("click", async () => {
       editEmployee(empID);
-      get_emp();
+      GetEmployees();
       edit_btn.style.display = "none";
       overlay.style.display = "none";
     })
@@ -168,17 +168,15 @@ function Display(employeeData) {
       const employee = employeeData[i];
       temp += `<tr>
       <td>#0${(currentPage - 1) * itemsPerPage + i + 1}</td>
-      <td><img src="/${employee.image}">${
-        employee.salutation + " " + employee.firstName + " " + employee.lastName
-      }</td>
+      <td><img src="/${employee.image}">${employee.salutation + " " + employee.firstName + " " + employee.lastName
+        }</td>
       <td>${employee.email}</td>
       <td>${employee.phone}</td>
       <td>${employee.gender}</td>
       <td>${employee.dob}</td>
       <td>${employee.country}</td>
-      <td><button id="more-btn"class="more-btn" onclick=btn_active('${
-        employee._id
-      }')><span class="material-symbols-outlined">
+      <td><button id="more-btn"class="more-btn" onclick=btn_active('${employee._id
+        }')><span class="material-symbols-outlined">
                                 more_horiz
                               </span></button></td>
         
@@ -200,10 +198,10 @@ let selectemp = document.getElementById("selectemp");
 selectemp.value = itemsPerPage;
 selectemp.addEventListener("click", () => {
   itemsPerPage = selectemp.value;
-  get_emp();
+  GetEmployees();
 });
 
-function get_emp() {
+function GetEmployees() {
   console.log(currentPage);
   fetch(
     `http://localhost:5000/employee/?page=${currentPage}&limit=${itemsPerPage}`
@@ -241,10 +239,10 @@ function renderPaginationButtons(pageCount) {
 
 function changePage(page) {
   currentPage = page;
-  get_emp();
+  GetEmployees();
 }
 
-get_emp();
+GetEmployees();
 
 //-------------------------------------------------POST-method----------------------------------------------
 
@@ -259,8 +257,8 @@ postForm.addEventListener("click", function (event) {
   const email = document.getElementById("Email").value;
   const phone = document.getElementById("Phone").value;
   const dob = document.getElementById("dob").value;
-  let  gender = document.querySelector('input[name="gender"]:checked');
-  if(gender){
+  let gender = document.querySelector('input[name="gender"]:checked');
+  if (gender) {
     const genderChecked = gender.value;
     gender = genderChecked;
   }
@@ -314,7 +312,7 @@ postForm.addEventListener("click", function (event) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Employee added:", data);
-        get_emp();
+        GetEmployees();
         clearForm();
         close_form();
         addedEmployee();
@@ -334,7 +332,7 @@ function delete_employee(empID) {
     method: "DELETE",
   });
   close_delete_employee();
-  get_emp();
+  GetEmployees();
   deletedEmployee();
 }
 
@@ -393,7 +391,7 @@ async function editEmployee(empID) {
       return res.json();
     })
     .then((data) => {
-      get_emp();
+      GetEmployees();
       close_edit_form();
       editedEmployee();
     })
@@ -591,7 +589,7 @@ async function searchEmployee() {
   const searchInput = document.getElementById("searchEmployee").value;
   console.log(searchInput);
   if (searchInput === "" || searchInput === undefined || searchInput === null) {
-    get_emp();
+    GetEmployees();
   } else {
     await fetch(`http://localhost:5000/employee/search?q=${searchInput}`)
       .then((res) => res.json())

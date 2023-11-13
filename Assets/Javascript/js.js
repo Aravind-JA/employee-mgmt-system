@@ -53,12 +53,12 @@ function edit_employee(empID) {
   const overlay = document.getElementsByClassName("overlay")[0];
   edit_btn.style.display = "block";
   overlay.style.display = "block";
-  fetch(`http://localhost:5001/employee/${empID}`)
+  fetch(`http://localhost:5000/employee/${empID}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
       const imagePreview = document.getElementById("image-preview");
-      imagePreview.src = `http://localhost:5001/employee/${empID}/avatar`;
+      imagePreview.src = `http://localhost:5000/employee/${empID}/avatar`;
       document.getElementById("salutation-edit").value = data.salutation;
       document.getElementById("firstName-edit").value = data.firstName;
       document.getElementById("lastName-edit").value = data.lastName;
@@ -206,7 +206,7 @@ selectemp.addEventListener("click", () => {
 function get_emp() {
   console.log(currentPage);
   fetch(
-    `http://localhost:5001/employee/?page=${currentPage}&limit=${itemsPerPage}`
+    `http://localhost:5000/employee/?page=${currentPage}&limit=${itemsPerPage}`
   )
     .then((res) => res.json())
     .then((data) => {
@@ -307,7 +307,7 @@ postForm.addEventListener("click", function (event) {
 
   // Sending the employee data to the server
   if (validateForm()) {
-    fetch("http://localhost:5001/employee", {
+    fetch("http://localhost:5000/employee", {
       method: "POST",
       body: formData,
     })
@@ -330,7 +330,7 @@ postForm.addEventListener("click", function (event) {
 // -------------------------------------------DELETE-method-------------------------------------------
 
 function delete_employee(empID) {
-  fetch(`http://localhost:5001/employee/${empID}`, {
+  fetch(`http://localhost:5000/employee/${empID}`, {
     method: "DELETE",
   });
   close_delete_employee();
@@ -385,7 +385,7 @@ async function editEmployee(empID) {
   formData.append("username", username);
   formData.append("password", password);
 
-  await fetch(`http://localhost:5001/employee/${empID}`, {
+  await fetch(`http://localhost:5000/employee/${empID}`, {
     method: "PUT",
     body: formData,
   })
@@ -593,7 +593,7 @@ async function searchEmployee() {
   if (searchInput === "" || searchInput === undefined || searchInput === null) {
     get_emp();
   } else {
-    await fetch(`http://localhost:5001/employee/search?q=${searchInput}`)
+    await fetch(`http://localhost:5000/employee/search?q=${searchInput}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
